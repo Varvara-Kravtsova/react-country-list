@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import countryData from "./country-data.json";
+import { ICountry } from "./types/index";
+import { CountryList } from "./components/CountryList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+ const countries: ICountry[] = countryData.map((country) => ({
+  name: country.name.common,
+  flags: country.flags.svg,
+  capital: country.capital[0],
+  region: country.region,
+  area: country.area,
+  population: country.population,
+ }));
+
+ return (
+  <div className="container">
+   <h1 className="py-3">Country List</h1>
+   <CountryList countries={countries} />
+  </div>
+ );
 }
 
 export default App;
